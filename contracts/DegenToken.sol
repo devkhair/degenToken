@@ -5,7 +5,8 @@ import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 
 contract DegenToken is ERC20{
     address public gameOwner;
-    
+    mapping (address => uint) public playerSkin;
+
     constructor() ERC20("Degen", "DGN") {
         gameOwner= msg.sender;  
     }
@@ -46,24 +47,28 @@ contract DegenToken is ERC20{
             require(this.balanceOf(msg.sender) >= 100, "DGN balance not enough");
             approve(msg.sender, 100);
             transferFrom(msg.sender, gameOwner, 100);
+            playerSkin[msg.sender] = 1;
             return true;
         }
         else if (_Item == 2) {
             require(this.balanceOf(msg.sender) >= 50, "DGN balance not enough");
             approve(msg.sender, 15);
             transferFrom(msg.sender, gameOwner, 50);
+            playerSkin[msg.sender] = 2;
             return true;
         }
         else if (_Item == 3) {
             require(this.balanceOf(msg.sender) >= 25, "DGN balance not enough");
             approve(msg.sender, 25);
             transferFrom(msg.sender, gameOwner, 25);
+            playerSkin[msg.sender] = 3;
             return true;
         }
         else if (_Item == 4) {
             require(this.balanceOf(msg.sender) >= 15, "DGN balance not enough");
             approve(msg.sender, 15);
             transferFrom(msg.sender, gameOwner, 15);
+            playerSkin[msg.sender] = 3;
             return true;
         }
         else {
